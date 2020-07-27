@@ -1,0 +1,55 @@
+# 安卓monkey遍历(MONKEY)默认配置文件, 命令行执行时可指定配置文件, 否则读取默认配置文件
+
+REQUIRED:
+  # 安卓包名
+  ANDROID_PACKAGE: com.jzyd.coupon
+  # 安卓启动activity名
+  ANDROID_MAIN_ACTIVITY:  com.jzyd.coupon.page.launcher.mvp.SplashActivityViewer
+
+  IOS_BUNDLE_ID: com.jzyd.YueDanBa
+  # 安卓启动activity名
+  IOS_BUNDLE_NAME: 省钱PRO
+  #IPA名字的前缀
+  IOS_IPA_NAME: coupon
+
+OPTIONAL:
+  # MAX ACTION COUNT, 不配置启动默认配置, 3000
+  COUNT: 3000
+  # MAX EXE DURATION, 单位为秒, 不配置启动默认配置, 3600秒
+  DURATION: 3600
+
+
+# MONKEY ACTION PERCENTAGE, 只支持以下类型的action, 为了直观比例之后尽量为100, 不配置启动默认配置, 参考setting.py
+# 只配置有限比例, 如只配置'PER_CLICK: 85', 比例为所有动作100%为CLICK
+MONKEY_PERCENTAGE:
+  # 随机点击页面的可点元素
+  PER_CLICK: 85
+  # 根据屏幕分辨率, 上滑动
+  PER_SWIPE_UP: 3
+  # 根据屏幕分辨率, 上滑动
+  PER_SWIPE_DOWN: 2
+  # 随机长按页面的可长按元素
+  PER_LONG_PRESS: 2
+  # HOME KEY, 安卓
+  PER_HOME_KEY: 2
+  # BACK KEY
+  PER_BACK_KEY: 1
+  # 双击
+  PER_DOUBLE_CLICK: 2
+  #缩小(两指)
+  PER_PINCH: 1
+  #放大(两指)
+  PER_UNPINCH: 2
+  #拖拽
+  PER_DRAG_RATIO: 1
+
+# TARGET 配置, 结构为list, 至少有一个item, 每个item顺序执行
+# STEPS, 从起始页出发, 进入目标页面步骤; 支持动作 CLICK 和 ENTER
+# 如果TARGET为起始页, STEPS第一个值为 LAUNCH
+# CLICK格式, CLICK ||| XPATH
+# ENTER格式, ENTER ||| XPATH ||| ENTER_TEXT , 后面还要再跟CLICk动作才能跳转
+# TARGET_TEXT, 用于校验目标页面, 所有文本需要在目标页面展现, 为空不校验
+# TARGET_ACTIVITY, 用于校验目标页面, 只有安卓支持, 为空不校验
+TARGET:
+  - STEPS:
+    - 'LAUNCH'
