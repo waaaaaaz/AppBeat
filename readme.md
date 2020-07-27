@@ -56,7 +56,7 @@ python run.py -T android -U 123uads -M target -F ./AppBeat/config/android_config
 ```
 
 - 配置文件：
-  - 参考 example_config.yml(config/example_config.yml), 内附说明
+  - 参考 [example_config.yml](config/example_config.yml)  内附说明
   
 - 其他功能：
   - 记录所有执行步骤及结果, 异步缓存在本地

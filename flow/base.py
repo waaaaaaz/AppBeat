@@ -147,7 +147,7 @@ class Base(object):
         clickable_item_dict_back = self.build_clickable_item_dict_back(clickable_item_dict)
         page_text_list = XPathUtils.page_text_list(current_page_source)
         current_activity_key = self.build_activity_key(page_text_list)
-        return current_activity_key, clickable_item_dict_back
+        return current_activity_key, clickable_item_dict
 
     def build_clickable_item_dict_back(self, clickable_item_dict):
         count = 3
