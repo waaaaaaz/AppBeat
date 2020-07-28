@@ -19,8 +19,17 @@ ANDROID_APP_NAME_XPATH_EXPR = "(//*[@package!=''])[1]"
 # ios app name xpath expr
 IOS_APP_NAME_XPATH_EXPR = "//*[contains(@type,\"Application\")]"
 
-# clickable item xpath expr
-CLICKABLE_XPATH_EXPR = "//*[@clickable='true']"
+# android clickable item xpath expr
+ANDROID_CLICKABLE_XPATH_EXPR = "//*[@clickable='true']"
+
+# ios clickable item xpath expr
+IOS_CLICKABLE_XPATH_EXPR = '//*[@type="XCUIElementTypeCell" and @enabled="true"]'
+
+# ios button item xpath expr
+IOS_BUTTON_XPATH_EXPR = '//*[@type="XCUIElementTypeButton" and @enabled="true"]'
+
+
+
 
 # all item xpath expr
 ALL_XPATH_EXPR = "//*"

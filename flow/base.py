@@ -143,10 +143,16 @@ class Base(object):
             return False
 
     def get_activity_key_and_clickable_dict(self, current_page_source):
-        clickable_item_dict = XPathUtils.page_clickable_item_update(current_page_source)
-        clickable_item_dict_back = self.build_clickable_item_dict_back(clickable_item_dict)
-        page_text_list = XPathUtils.page_text_list(current_page_source)
+        if self.mode == "android":
+            clickable_item_dict = XPathUtils.android_page_clickable_item_update(current_page_source)
+            clickable_item_dict_back = self.build_clickable_item_dict_back(clickable_item_dict)
+            page_text_list = XPathUtils.android_page_text_list(current_page_source)
+        else:
+            clickable_item_dict = XPathUtils.ios_page_clickable_item_update(current_page_source)
+            clickable_item_dict_back = self.build_clickable_item_dict_back(clickable_item_dict)
+            page_text_list = XPathUtils.ios_page_text_list(current_page_source)
         current_activity_key = self.build_activity_key(page_text_list)
+
         return current_activity_key, clickable_item_dict
 
     def build_clickable_item_dict_back(self, clickable_item_dict):
@@ -187,7 +193,8 @@ class Base(object):
         status = self.update_activity_status(self.target_activity)
         logger.info("go_to_target ::: target activity status is {0}".format(status))
         if status == RecordsStatus.DONE:
-            logger.info("should switch target activity, exe records is {0}".format(json.dumps(self.exe_records, ensure_ascii=False)))
+            logger.info("should switch target activity, exe records is {0}".format(
+                json.dumps(self.exe_records, ensure_ascii=False)))
             self.update_target()
             self.exe()
 
@@ -376,7 +383,10 @@ class Base(object):
             for k in self.exe_records[activity_key][str(count)].keys():
                 if k not in clicked_list:
                     clicked_list.append(k)
-        clickable_item_dict = XPathUtils.page_clickable_item_update(current_page_source, clicked_list)
+        if self.mode == "android":
+            clickable_item_dict = XPathUtils.android_page_clickable_item_update(current_page_source, clicked_list)
+        else:
+            clickable_item_dict = XPathUtils.ios_page_clickable_item_update(current_page_source, clicked_list)
 
         if len(clickable_item_dict) > 0:
             clickable_item_dict_back = self.build_clickable_item_dict_back(clickable_item_dict)
@@ -426,4 +436,3 @@ class Base(object):
     def init_steps(self):
         # logger.info("重置回溯步骤")
         self.steps = ["launch"]
-
