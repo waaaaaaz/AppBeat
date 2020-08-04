@@ -27,6 +27,7 @@ class Base(object):
         self.driver = driver
         self.rule = driver.rule
         self.mode = self.rule.mode
+        self.device_type = self.rule.device_type
         self.steps = []
         self.page_list = []
         self.exe_records = {}
@@ -143,7 +144,7 @@ class Base(object):
             return False
 
     def get_activity_key_and_clickable_dict(self, current_page_source):
-        if self.mode == "android":
+        if self.device_type == "android":
             clickable_item_dict = XPathUtils.android_page_clickable_item_update(current_page_source)
             clickable_item_dict_back = self.build_clickable_item_dict_back(clickable_item_dict)
             page_text_list = XPathUtils.android_page_text_list(current_page_source)
@@ -172,10 +173,12 @@ class Base(object):
         if current_page_source == "" or current_page_source is None:
             loop_count -= 1
             self.get_page_structure(loop_count)
+
         current_activity_key, clickable_item_dict = self.get_activity_key_and_clickable_dict(current_page_source)
         if current_activity_key == "" or current_page_source is None:
             loop_count -= 1
             self.get_page_structure(loop_count)
+
         return current_activity_key, clickable_item_dict, current_page_source
 
     def build_activity_key(self, text_list):
@@ -383,7 +386,7 @@ class Base(object):
             for k in self.exe_records[activity_key][str(count)].keys():
                 if k not in clicked_list:
                     clicked_list.append(k)
-        if self.mode == "android":
+        if self.device_type == "android":
             clickable_item_dict = XPathUtils.android_page_clickable_item_update(current_page_source, clicked_list)
         else:
             clickable_item_dict = XPathUtils.ios_page_clickable_item_update(current_page_source, clicked_list)

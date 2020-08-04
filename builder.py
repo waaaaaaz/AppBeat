@@ -66,7 +66,7 @@ class Builder(object):
             except Exception as e:
                 logger.error("error type is {0}".format(e.__class__.__name__))
                 logger.error("error message is {0}".format(e))
-            pass
+                pass
         self.to_local_cache()
         self.video_generator()
         logger.info("DONE")
