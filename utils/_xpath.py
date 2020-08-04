@@ -208,6 +208,7 @@ class XPathUtils:
 
     @staticmethod
     def ios_element_center_position(bounds_dict):
+        # x，y 是左上角处始坐标 width和height是个宽和高
         x = int(bounds_dict["x"]) + int(bounds_dict["width"]) / 2
         y = int(bounds_dict["y"]) + int(bounds_dict["height"]) / 2
         return int(x), int(y)
